@@ -1,32 +1,102 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/7LzBu2L3)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=22118518&assignment_repo_type=AssignmentRepo)
-# React Native: Field Notes
+# Field Notes 📝
 
-## Cel
-Stwórz podstawową aplikację mobilną w **React Native (React)**, która wykorzystuje **natywną funkcję urządzenia** oraz **komunikuje się z API**. Aplikacja ma mieć **3–4 widoki**.
+Aplikacja mobilna React Native (Expo) do tworzenia notatek ze zdjęciami.
 
+## Funkcje
 
-## Zakres i wymagania funkcjonalne
-- **Natywna funkcja (min. 1):** wybierz i uzasadnij (np. aparat/kamera, lokalizacja GPS, wibracje/haptics, pliki/galeria).
-- **API (min. 1 endpoint):** odczyt lub zapis danych (publiczne lub własne/mock).
-- **Widoki (3–4):**
-  1. **Lista notatek** (tytuł, data, miniaturka/znacznik lokalizacji).
-  2. **Szczegóły notatki** (opis, zdjęcie/pozycja, akcje).
-  3. **Dodaj/Edytuj** (formularz: tytuł, opis, dodaj zdjęcie **lub** pobierz lokalizację).
-  4. *(Opcjonalnie)* **Ustawienia/O aplikacji** (akcenty dostępności, info o wersji).
-- **Stan:** lokalny lub prosty store; brak trwałego storage wymagany, ale dopuszczalny.
-- **Dostępność:** podstawowe etykiety i rozmiary celów dotyku (~44–48 px).
+### Natywna funkcja: Aparat / Galeria
+- Robienie zdjęć aparatem urządzenia
+- Wybieranie zdjęć z galerii
+- Wykorzystuje `expo-image-picker`
 
-## Testowanie lokalne (w trakcie developmentu)
-- Uruchom na **urządzeniu/emulatorze**.
-- Pokaż: dodanie notatki, użycie **natywnej funkcji** (np. zrobienie zdjęcia lub pobranie GPS), wyświetlenie listy i szczegółów.
-- Pokaż komunikację z **API** (np. pobranie listy lub zapis nowej notatki).
-- Zweryfikuj: błędy/edge cases (brak uprawnień, brak internetu).
+### Integracja z API
+- Pobieranie notatek z JSONPlaceholder API (`GET /posts`)
+- Zapisywanie nowych notatek (`POST /posts`)
+- Fallback na mock data przy braku internetu
 
-## Definition of Done (DoD)
-- [ ] 3–4 kompletne widoki zgodne z opisem.
-- [ ] Użyta co najmniej **1 natywna funkcja**.
-- [ ] Integracja z **API** (co najmniej 1 żądanie).
-- [ ] Czytelny UI + podstawowa dostępność.
-- [ ] Aktualizacja `README.md` z opisem funkcji i sposobem testowania.
-- [ ] Min. 3 logiczne commity.
+### Widoki (3)
+1. **Lista notatek** - wyświetla wszystkie notatki z tytułem, datą i miniaturką
+2. **Szczegóły notatki** - pełny widok z opisem, zdjęciem i akcjami (edycja/usuń)
+3. **Dodaj/Edytuj** - formularz z możliwością dodania zdjęcia
+
+## Wymagania
+
+- Node.js 18+
+- Expo CLI
+- iOS Simulator / Android Emulator / Expo Go na urządzeniu
+
+## Instalacja
+
+```bash
+# Zainstaluj zależności
+npm install
+
+# Uruchom aplikację
+npx expo start
+```
+
+## Testowanie
+
+### Na urządzeniu fizycznym (zalecane dla aparatu)
+1. Zainstaluj aplikację **Expo Go** ze sklepu
+2. Zeskanuj kod QR z terminala
+
+### Na emulatorze
+- iOS: Naciśnij `i` w terminalu
+- Android: Naciśnij `a` w terminalu
+
+### Scenariusze testowe
+
+1. **Dodanie notatki z apratem**
+   - Kliknij przycisk `+` 
+   - Wybierz "Aparat" i zrób zdjęcie
+   - Wpisz tytuł i opis
+   - Zapisz
+
+2. **Dodanie notatki z galerii**
+   - Kliknij przycisk `+`
+   - Wybierz "Galeria" i wybierz zdjęcie
+   - Wpisz tytuł i opis
+   - Zapisz
+
+3. **Przeglądanie i edycja**
+   - Kliknij na notatkę z listy
+   - Zobacz szczegóły
+   - Kliknij "Edytuj" aby zmienić
+   - Kliknij "Usuń" aby usunąć
+
+4. **Komunikacja z API**
+   - Przy starcie aplikacji pobierane są notatki z API
+   - Przy dodawaniu notatki dane są wysyłane do API (POST)
+   - W konsoli widoczne są logi z API
+
+## Technologie
+
+- React Native + Expo SDK 52
+- React Navigation (native-stack)
+- expo-image-picker (natywny dostęp do aparatu/galerii)
+- JSONPlaceholder API
+
+## Struktura projektu
+
+```
+├── App.js                 # Główny plik z nawigacją
+├── src/
+│   ├── api/
+│   │   └── notesApi.js    # Komunikacja z API
+│   ├── context/
+│   │   └── NotesContext.js # Stan aplikacji
+│   └── screens/
+│       ├── NotesListScreen.js    # Lista notatek
+│       ├── NoteDetailsScreen.js  # Szczegóły notatki
+│       └── AddEditNoteScreen.js  # Dodawanie/edycja
+├── app.json               # Konfiguracja Expo
+└── package.json
+```
+
+## Dostępność (a11y)
+
+- `accessibilityLabel` na przyciskach i elementach interaktywnych
+- `accessibilityRole` dla semantyki
+- Minimalne rozmiary celów dotyku: 48px
+

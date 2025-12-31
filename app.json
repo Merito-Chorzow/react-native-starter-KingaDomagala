@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Field Notes",
+    "slug": "field-notes",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#1a1a2e"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Aplikacja potrzebuje dostępu do aparatu aby dodawać zdjęcia do notatek.",
+        "NSPhotoLibraryUsageDescription": "Aplikacja potrzebuje dostępu do galerii aby wybierać zdjęcia do notatek."
+      }
+    },
+    "android": {
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Aplikacja potrzebuje dostępu do galerii.",
+          "cameraPermission": "Aplikacja potrzebuje dostępu do aparatu."
+        }
+      ]
+    ]
+  }
+}
+
